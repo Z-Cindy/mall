@@ -5,8 +5,14 @@
       <div class="desc">{{detailInfo.desc}}</div>
       <div class="end"></div>
     </div>
-    <div class="info-key">{{detailInfo.detailImage[0].key}}</div>
-    <div class="info-list">
+    <!-- <div class="info-key">{{detailInfo.detailImage[0].key}}</div> -->
+    <div v-for="(item,index) in detailInfo.detailImage" :key="index">
+      <div class="info-key">{{item.key}}</div>
+      <div class="info-list">
+        <img v-for="(item,index) in item.list" :key="index" :src="item" alt="" @load="imgLoad">
+      </div>
+    </div>
+    <!-- <div class="info-list">
       <img
         v-for="(item,index) in detailInfo.detailImage[0].list"
         :key="index"
@@ -14,7 +20,7 @@
         @load="imgLoad"
         alt
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
