@@ -36,6 +36,9 @@ export default {
   .recommed-item {
     flex: 1;
   }
+  .recommed-item a {
+    color: #888
+  }
   .recommed-item img {
     width: 70px;
     margin-bottom: 10px;

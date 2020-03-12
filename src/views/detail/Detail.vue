@@ -14,7 +14,7 @@
       <goods-list ref="recommend" :goods="recommends"/>
     </scroll>
 
-    <detail-bottom-bar :addToCart="addToCart"/>
+    <detail-bottom-bar @addToCart="addToCart"/>
 
     <back-top @click.native="backClick"
     v-show="isShowBackTop"></back-top>
@@ -37,6 +37,8 @@
   import {getDetail, Goods, Shop, GoodsParam,getRecommend} from 'network/detail'
   import {itemListenerMixin ,backTopMixin} from 'common/mixin'
   import { debounce } from 'common/utils'
+
+  import { mapActions } from 'vuex';
 
 
   export default {
@@ -139,6 +141,7 @@
       },200)
     },
     methods: {
+      ...mapActions(['addCart']),
       imageLoad() {
         this.$refs.scroll.refresh()
 
@@ -174,7 +177,7 @@
       },
       addToCart() {
         // 获取购物车需要展示的信息
-        const product = {}
+        const product = {} 
         product.image = this.topImages[0];
         product.title = this.goods.title;
         product.desc = this.goods.desc;
@@ -182,7 +185,13 @@
         product.iid = this.iid;
 
         // 2.将商品添加到购物车里
-         this.$store.commit('addCart',product)
+        //  this.$store.commit('addCart',product)
+        //  this.$store.dispatch('addCart', product).then(res => {
+        //    console.log(res)
+        //  })
+        this.addCart(product).then(res => {
+          this.$toast.show(res,2000)
+        })
       }
     },
     mounted () {

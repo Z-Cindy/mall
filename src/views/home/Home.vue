@@ -12,8 +12,10 @@
      ref="scroll"
     @scroll="contentScroll"
     @pullingUp="loadMore"> 
+
       <home-swiper :banners="banners"
       @swiperImageLoad="swiperImageLoad"></home-swiper>
+
       <recommed-view :recommends="recommends"></recommed-view>
       <feature-view></feature-view>
       <tab-control :titles="['流行','新款','精选']" ref="tabControl2" 
@@ -40,6 +42,7 @@ import Scroll from 'components/common/scroll/Scroll'
 import {getHomeMultidata, getHomeGoods} from 'network/home'
 import { debounce } from 'common/utils'
 import {itemListenerMixin, backTopMixin} from 'common/mixin'
+import {POP, NEW, SELL} from 'common/const'
 
 
   export default {
@@ -59,8 +62,8 @@ import {itemListenerMixin, backTopMixin} from 'common/mixin'
         banners:[],
         recommends:[],
         goods:{
-          'pop':{page: 0, list: []},
-          'new':{page: 0, list: []},
+          'pop' : {page: 0, list: []},
+          'new' : {page: 0, list: []},
           'sell':{page: 0, list: []},
         },
         currentType:'pop',
@@ -95,9 +98,9 @@ import {itemListenerMixin, backTopMixin} from 'common/mixin'
       this.getHomeMultidata();
 
       // 请求商品数据
-      this.getHomeGoods('pop');
-      this.getHomeGoods('new');
-      this.getHomeGoods('sell');
+      this.getHomeGoods(POP);
+      this.getHomeGoods(NEW);
+      this.getHomeGoods(SELL);
       
     },
     mounted () {
@@ -146,6 +149,7 @@ import {itemListenerMixin, backTopMixin} from 'common/mixin'
         getHomeMultidata().then(res => {
           // console.log(res.data);
           this.banners = res.data.banner.list;
+          console.log('轮播图：',this.banners)
           this.recommends = res.data.recommend.list;
         }) 
       },

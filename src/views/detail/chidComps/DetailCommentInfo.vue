@@ -25,6 +25,7 @@
 
 <script>
   import {formatDate} from 'common/utils'
+  import { BACK_POSITION } from 'common/const'
 
   export default {
     name: "DetailCommentInfo",
@@ -38,7 +39,7 @@
     },
     filters: {
 		  showDate: function (value) {
-        let date = new Date(value*1000);
+        let date = new Date(value*BACK_POSITION);
         return formatDate(date, 'yyyy-MM-dd')
       }
     }

@@ -51,6 +51,8 @@ export default {
 
       img {
         width: 24px; 
+        margin-top: 5px;
+        vertical-align: middle;
       }
   }
 </style>
